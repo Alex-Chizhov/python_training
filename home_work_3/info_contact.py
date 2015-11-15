@@ -4,7 +4,7 @@ class Infos:
 
     def __init__(self, firstname,middelname,lastname,nickname, title,company,addres,home,mobile,
                           fax,homepage,day_Birthday,month_Birthday,year_Birthday,day_Anniversary,
-                          month_Anniversary,year_Anniversary,address2,phone2,notes,work):
+                          month_Anniversary,year_Anniversary,address2,phone2,notes,work,photo):
 
 
         self.firstname         = firstname
@@ -28,6 +28,6 @@ class Infos:
         self.phone2            = phone2
         self.notes             = notes
         self.work              = work
-
+        self.photo             = photo
 
 

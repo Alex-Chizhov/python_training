@@ -133,13 +133,13 @@ class test_add_group(unittest.TestCase):
 
 
 
-    #def test_add_group(self):
-       # wd = self.wd
-      #  self.open_hp(wd)
-       # self.login(wd, username="admin", password="secret")
-      #  self.group_creator(wd, Group(name="123", header="123", footer="123"))
-       # self.return_to_group_page(wd)
-      #  self.logout(wd)
+    def test_add_group(self):
+        wd = self.wd
+        self.open_hp(wd)
+        self.login(wd, username="admin", password="secret")
+        self.group_creator(wd, Group(name="123", header="123", footer="123"))
+        self.return_to_group_page(wd)
+        self.logout(wd)
 
 
 
@@ -166,13 +166,13 @@ class test_add_group(unittest.TestCase):
 
 
 
-   # def test_add_empty_group(self):
-    #    wd = self.wd
-     #   self.open_hp(wd)
-     #   self.login(wd, username="admin", password="secret")
-     #   self.group_creator(wd, Group(name="", header="", footer=""))
-    #    self.return_to_group_page(wd)
-    #    self.logout(wd)
+    def test_add_empty_group(self):
+        wd = self.wd
+        self.open_hp(wd)
+        self.login(wd, username="admin", password="secret")
+        self.group_creator(wd, Group(name="", header="", footer=""))
+        self.return_to_group_page(wd)
+        self.logout(wd)
 
 
 

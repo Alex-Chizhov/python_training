@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.common.keys import Keys
 from group import Group
 from info_contact import Infos
 import  unittest
@@ -121,7 +122,9 @@ class test_add_group(unittest.TestCase):
         # input notes
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").send_keys(info_contact.notes)
-
+        # input foto
+        wd.find_element_by_name("photo").click()
+        wd.find_element_by_name("photo").send_keys(info_contact.photo)
 
 
 
@@ -149,7 +152,7 @@ class test_add_group(unittest.TestCase):
        self.fill_form_contact(wd, Infos(firstname="qq", middelname="qq", lastname="qq", nickname="qq", title="qq", company="qq",
                           addres="ww", home="11", mobile="22", fax="22", homepage="wewr.ru", day_Birthday="[7]",
                           month_Birthday="[10]", year_Birthday="1980", day_Anniversary="[18]", month_Anniversary="[7]",
-                          year_Anniversary="2000", address2="12", phone2="12", notes="12", work ='qwe'))
+                          year_Anniversary="2000", address2="12", phone2="12", notes="12", work ='qwe',photo ="C:\\Users\\Alex\\Documents\\GitHub\\python_training\\test_s_photo\\avatar.jpg"))
        self.input_save_form(wd)
        self.logout(wd)
 
