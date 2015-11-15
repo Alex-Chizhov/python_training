@@ -123,7 +123,6 @@ class test_add_group(unittest.TestCase):
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").send_keys(info_contact.notes)
         # input foto
-        wd.find_element_by_name("photo").click()
         wd.find_element_by_name("photo").send_keys(info_contact.photo)
 
 
