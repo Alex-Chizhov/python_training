@@ -11,7 +11,7 @@ class ContactHelper:
 		wd = self.app.wd
 		wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
-	def fill_form_contact(self, info_contact):
+	def fill_form(self, info_contact):
 		wd = self.app.wd
 		# inpuy firstname
 		wd.find_element_by_name("firstname").click()
