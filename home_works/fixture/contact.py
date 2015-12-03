@@ -12,7 +12,7 @@ class ContactHelper:
 		wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
 
-	def type(self, field_name ,text):
+	def change_field_value(self, field_name, text):
 		wd = self.app.wd
 		if text is not None:
 			wd.find_element_by_name(field_name).click()
@@ -39,21 +39,21 @@ class ContactHelper:
 
 	def fill_form(self, info_contact):
 		wd = self.app.wd
-		self.type("firstname",info_contact.firstname)
-		self.type("middlename",info_contact.middelname)
-		self.type("lastname",info_contact.lastname)
-		self.type("nickname",info_contact.nickname)
-		self.type("title",info_contact.title)
-		self.type("company",info_contact.company)
-		self.type("address",info_contact.address)
-		self.type("home",info_contact.home)
-		self.type("mobile",info_contact.mobile)
-		self.type("work",info_contact.work)
-		self.type("fax",info_contact.fax)
-		self.type("homepage",info_contact.homepage)
-		self.type("address2",info_contact.address2)
-		self.type("phone2",info_contact.phone2)
-		self.type("notes",info_contact.notes)
+		self.change_field_value("firstname", info_contact.firstname)
+		self.change_field_value("middlename", info_contact.middelname)
+		self.change_field_value("lastname", info_contact.lastname)
+		self.change_field_value("nickname", info_contact.nickname)
+		self.change_field_value("title", info_contact.title)
+		self.change_field_value("company", info_contact.company)
+		self.change_field_value("address", info_contact.address)
+		self.change_field_value("home", info_contact.home)
+		self.change_field_value("mobile", info_contact.mobile)
+		self.change_field_value("work", info_contact.work)
+		self.change_field_value("fax", info_contact.fax)
+		self.change_field_value("homepage", info_contact.homepage)
+		self.change_field_value("address2", info_contact.address2)
+		self.change_field_value("phone2", info_contact.phone2)
+		self.change_field_value("notes", info_contact.notes)
 		self.input_foto("photo",info_contact.photo)
 		self.input_foto("byear",info_contact.year_Birthday)
 		self.input_foto("ayear",info_contact.year_Anniversary)
