@@ -2,9 +2,9 @@ __author__ = 'Alex'
 
 class Infos:
 
-    def __init__(self, firstname,middelname,lastname,nickname, title,company,addres,home,mobile,
-                          fax,homepage,day_Birthday,month_Birthday,year_Birthday,day_Anniversary,
-                          month_Anniversary,year_Anniversary,address2,phone2,notes,work,photo):
+    def __init__(self, firstname = None ,middelname = None,lastname = None,nickname = None, title = None,company = None,address = None,home = None,mobile = None,
+                          fax= None,homepage = None,day_Birthday= None,month_Birthday= None,year_Birthday= None,day_Anniversary= None,
+                          month_Anniversary= None,year_Anniversary= None,address2= None,phone2= None,notes= None,work= None,photo= None):
 
 
         self.firstname         = firstname
@@ -13,7 +13,7 @@ class Infos:
         self.nickname          = nickname
         self.title             = title
         self.company           = company
-        self.addres            = addres
+        self.address            = address
         self.home              = home
         self.mobile            = mobile
         self.fax               = fax
