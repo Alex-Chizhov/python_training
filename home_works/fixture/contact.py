@@ -1,3 +1,4 @@
+from selenium.webdriver.support.ui import Select
 class ContactHelper:
 
 	def __init__(self,app):
@@ -86,9 +87,28 @@ class ContactHelper:
 		wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
 		# fill form
 		self.fill_form(new_contact_data)
-		# sumbit modification
-		wd.find_element_by_name("update").click()
+		self.click_update()
 		wd.find_element_by_link_text("home").click()
 
+	def click_update(self):
+		wd = self.app.wd
+		wd.find_element_by_name("update").click()
 
+	def count(self):
+		wd = self.app.wd
+		wd.find_element_by_link_text("home").click()
+		return len(wd.find_elements_by_name("selected[]"))
+
+
+	def count_modify(self,field_name):
+		wd = self.app.wd
+		wd.find_element_by_link_text("home").click()
+		wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+		return len(wd.find_element_by_name(field_name).get_attribute("value"))
+
+	def count_modify_amonth(self):
+		wd = self.app.wd
+		wd.find_element_by_link_text("home").click()
+		wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+		return  len (wd.find_element_by_name('amonth').get_attribute("value"))
 
