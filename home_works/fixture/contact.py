@@ -4,6 +4,13 @@ class ContactHelper:
 	def __init__(self,app):
 		self.app = app
 
+	def open_hp(self):
+		wd = self.app.wd
+		if not (wd.current_url.endswith("/") and len (wd.find_elements_by_name("Last name")) > 0):
+			wd.find_element_by_link_text("home").click()
+
+
+
 	def link_add_new(self):
 		wd = self.app.wd
 		wd.find_element_by_link_text("add new").click()
@@ -75,20 +82,19 @@ class ContactHelper:
 		wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
 		# agree in new window
 		wd.switch_to_alert().accept()
-		#home
-		wd.find_element_by_link_text("home").click()
+		self.open_hp()
 
 
 
 	def modify_first_contact(self,new_contact_data):
 		wd = self.app.wd
-		wd.find_element_by_link_text("home").click()
+		self.open_hp()
 		# select first contact
 		wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
 		# fill form
 		self.fill_form(new_contact_data)
 		self.click_update()
-		wd.find_element_by_link_text("home").click()
+		self.open_hp()
 
 	def click_update(self):
 		wd = self.app.wd
@@ -96,19 +102,19 @@ class ContactHelper:
 
 	def count(self):
 		wd = self.app.wd
-		wd.find_element_by_link_text("home").click()
+		self.open_hp()
 		return len(wd.find_elements_by_name("selected[]"))
 
 
 	def count_modify(self,field_name):
 		wd = self.app.wd
-		wd.find_element_by_link_text("home").click()
+		self.open_hp()
 		wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
 		return len(wd.find_element_by_name(field_name).get_attribute("value"))
 
 	def count_modify_amonth(self):
 		wd = self.app.wd
-		wd.find_element_by_link_text("home").click()
+		self.open_hp()
 		wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
 		return  len (wd.find_element_by_name('amonth').get_attribute("value"))
 
