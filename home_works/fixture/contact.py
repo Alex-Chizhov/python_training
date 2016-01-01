@@ -1,4 +1,7 @@
 from selenium.webdriver.support.ui import Select
+from model.info_contact import Infos
+from selenium.webdriver.common.by import By
+
 class ContactHelper:
 
 	def __init__(self,app):
@@ -8,6 +11,17 @@ class ContactHelper:
 		wd = self.app.wd
 		if not (wd.current_url.endswith("/") and len (wd.find_elements_by_name("Last name")) > 0):
 			wd.find_element_by_link_text("home").click()
+
+
+
+	def create(self, contact):
+		wd = self.app.wd
+		self.link_add_new()
+		self.fill_form(contact)
+		# submit adding new contact
+		wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+		self.open_hp()
+
 
 
 
@@ -86,15 +100,31 @@ class ContactHelper:
 
 
 
-	def modify_first_contact(self,new_contact_data):
+	#def modify_first_contact(self,new_contact_data):
+		#wd = self.app.wd
+		#self.open_hp()
+		# select first contact
+		#wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+		# fill form
+		#self.fill_form(new_contact_data)
+		#self.click_update()
+		#self.open_hp()
+
+	def modify_first_contact(self, new_contact):
 		wd = self.app.wd
 		self.open_hp()
-		# select first contact
-		wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
-		# fill form
-		self.fill_form(new_contact_data)
-		self.click_update()
+		self.select_first_contact()
+		# click modify
+		wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
+		self.fill_form(new_contact)
+		#submit update
+		wd.find_element_by_name("update").click()
 		self.open_hp()
+
+	def select_first_contact(self):
+		wd = self.app.wd
+		wd.find_element_by_name("selected[]").click()
+
 
 	def click_update(self):
 		wd = self.app.wd
@@ -117,4 +147,17 @@ class ContactHelper:
 		self.open_hp()
 		wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
 		return  len (wd.find_element_by_name('amonth').get_attribute("value"))
+
+	def get_contact_list(self):
+		wd = self.app.wd
+		self.open_hp()
+		contacts = []
+		for element in wd.find_elements_by_name("entry"):
+			td_values = element.find_elements(By.TAG_NAME, "td")
+			last_name = td_values[1].text
+			first_name = td_values[2].text
+			id = element.find_element_by_name("selected[]").get_attribute("value")
+			contacts.append(Infos(lastname=last_name, firstname=first_name, id = id))
+		return contacts
+
 

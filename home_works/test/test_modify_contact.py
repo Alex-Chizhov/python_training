@@ -2,30 +2,15 @@ from model.info_contact import Infos
 
 
 
-
-
-
-def test_modify_contact_firstname(app):
-	if app.contact.count() == 0:
-		app.contact.link_add_new()
-		app.contact.fill_form(Infos(firstname="AAAAA"))
-		app.contact.input_save_form()
-	if app.contact.count_modify('firstname') == 0:
-		app.contact.fill_form(Infos(firstname ='1111'))
-		app.contact.click_update()
-		#app.contact.modify_first_contact(Infos(firstname="New firstname")) Решил не удалять пока
-
-
-def test_modify_contact_month_Anniversary(app):
-	if app.contact.count() == 0:
-		app.contact.link_add_new()
-		app.contact.fill_form(Infos(month_Anniversary="[5]"))
-		app.contact.input_save_form()
-	if app.contact.count_modify_amonth() == 1:
-		app.contact.fill_form(Infos(month_Anniversary ="[7]"))
-		app.contact.click_update()
-
-
-
-	#app.contact.modify_first_contact(Infos(month_Anniversary="[6]"))
+def test_add_modify_contact(app):
+    old_contacts = app.contact.get_contact_list()
+    contact = Infos(firstname = "AAAA", lastname="BBBBB", day_Birthday="[2]")
+    if app.contact.count() == 0:
+        app.contact.create(contact)
+    contact.id = old_contacts[0].id
+    app.contact.modify_first_contact(contact)
+    new_contacts = app.contact.get_contact_list()
+    assert len(old_contacts) == len(new_contacts)
+    old_contacts[0] = contact
+    assert sorted(old_contacts, key=Infos.id_or_max) == sorted(new_contacts, key=Infos.id_or_max)
 

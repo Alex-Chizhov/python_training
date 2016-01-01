@@ -1,3 +1,4 @@
+from model.group import Group
 class GroupHelper:
 
 	def __init__(self,app):
@@ -52,16 +53,31 @@ class GroupHelper:
 		wd = self.app.wd
 		wd.find_element_by_name("selected[]").click()
 
-	def modify_first_group(self, new_group_data):
+	#def modify_first_group(self, new_group_data):
+		#wd = self.app.wd
+		#self.open_groups_page()
+		#self.select_first_group()
+		# open modification form
+		#wd.find_element_by_name("edit").click()
+		# fill form
+		#self.fill_group_form(new_group_data)
+		#self.click_update()
+		#self.return_to_group_page()
+
+	def modify_first_group(self, new_group):
 		wd = self.app.wd
 		self.open_groups_page()
 		self.select_first_group()
-		# open modification form
+		# click edit button
 		wd.find_element_by_name("edit").click()
-		# fill form
-		self.fill_group_form(new_group_data)
-		self.click_update()
-		self.return_to_group_page()
+		#modify group form
+		self.fill_group_form(new_group)
+		#submit modify
+		wd.find_element_by_name("update").click()
+		# return to group page
+		self.open_groups_page()
+
+
 
 	def click_update(self):
 		wd = self.app.wd
@@ -80,4 +96,12 @@ class GroupHelper:
 		wd.find_element_by_name("edit").click()
 		return len(wd.find_element_by_name(field_name).get_attribute("value"))
 
-
+	def get_group_list(self):
+		wd = self.app.wd
+		self.open_groups_page()
+		groups = []
+		for element in wd.find_elements_by_css_selector('span.group'):
+			text = element.text
+			id = element.find_element_by_name("selected[]").get_attribute("value")
+			groups.append(Group(name = text, id = id))
+		return groups
