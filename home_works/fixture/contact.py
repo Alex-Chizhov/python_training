@@ -21,7 +21,7 @@ class ContactHelper:
 		# submit adding new contact
 		wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 		self.open_hp()
-
+		self.contact_cache = None
 
 
 
@@ -97,7 +97,7 @@ class ContactHelper:
 		# agree in new window
 		wd.switch_to_alert().accept()
 		self.open_hp()
-
+		self.contact_cache = None
 
 
 	#def modify_first_contact(self,new_contact_data):
@@ -120,6 +120,7 @@ class ContactHelper:
 		#submit update
 		wd.find_element_by_name("update").click()
 		self.open_hp()
+		self.contact_cache = None
 
 	def select_first_contact(self):
 		wd = self.app.wd
@@ -148,16 +149,18 @@ class ContactHelper:
 		wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
 		return  len (wd.find_element_by_name('amonth').get_attribute("value"))
 
-	def get_contact_list(self):
-		wd = self.app.wd
-		self.open_hp()
-		contacts = []
-		for element in wd.find_elements_by_name("entry"):
-			td_values = element.find_elements(By.TAG_NAME, "td")
-			last_name = td_values[1].text
-			first_name = td_values[2].text
-			id = element.find_element_by_name("selected[]").get_attribute("value")
-			contacts.append(Infos(lastname=last_name, firstname=first_name, id = id))
-		return contacts
+	contact_cache = None
 
+	def get_contact_list(self):
+		if self.contact_cache is None:
+			wd = self.app.wd
+			self.open_hp()
+			self.contact_cache = []
+			for element in wd.find_elements_by_name("entry"):
+				td_values = element.find_elements(By.TAG_NAME, "td")
+				last_name = td_values[1].text
+				first_name = td_values[2].text
+				id = element.find_element_by_name("selected[]").get_attribute("value")
+				self.contact_cache.append(Infos(lastname=last_name, firstname=first_name, id = id))
+		return self.contact_cache
 
