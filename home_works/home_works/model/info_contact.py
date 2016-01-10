@@ -5,7 +5,7 @@ class Infos:
 
     def __init__(self, firstname = None ,middelname = None,lastname = None,nickname = None, title = None,company = None,address = None,home = None,mobile = None,
                           fax= None,homepage = None,day_Birthday= None,month_Birthday= None,year_Birthday= None,day_Anniversary= None,
-                          month_Anniversary= None,year_Anniversary= None,address2= None,phone2= None,notes= None,work= None,photo= None,id=None):
+                          month_Anniversary= None,year_Anniversary= None,address2= None,phone2= None,notes= None,work= None,photo= None,id=None, all_phones_on_hp=None, all_email_on_hp=None,email=None,email2=None,email3=None):
 
 
         self.firstname         = firstname
@@ -14,7 +14,7 @@ class Infos:
         self.nickname          = nickname
         self.title             = title
         self.company           = company
-        self.address            = address
+        self.address           = address
         self.home              = home
         self.mobile            = mobile
         self.fax               = fax
@@ -31,6 +31,11 @@ class Infos:
         self.work              = work
         self.photo             = photo
         self.id = id
+        self.email              = email
+        self.email2             = email2
+        self.email3             = email3
+        self.all_phones_on_hp = all_phones_on_hp
+        self.all_email_on_hp = all_email_on_hp
 
     def __repr__(self):
         return "%s:%s:%s" % (self.lastname, self.firstname, self.id)
