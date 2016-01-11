@@ -30,15 +30,15 @@ class Infos:
         self.notes             = notes
         self.work              = work
         self.photo             = photo
-        self.id = id
-        self.email              = email
-        self.email2             = email2
-        self.email3             = email3
-        self.all_phones_on_hp = all_phones_on_hp
-        self.all_email_on_hp = all_email_on_hp
+        self.id                = id
+        self.email             = email
+        self.email2            = email2
+        self.email3            = email3
+        self.all_phones_on_hp  = all_phones_on_hp
+        self.all_email_on_hp   = all_email_on_hp
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.lastname, self.firstname, self.id)
+        return "%s:%s:%s:%s:%s" % (self.lastname, self.firstname, self.email, self.home, self.id,)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) \
