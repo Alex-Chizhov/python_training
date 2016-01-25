@@ -230,3 +230,52 @@ class ContactHelper:
 		mobile = re.search('M: (.*)',text).group(1)
 		phone2 = re.search('P: (.*)',text).group(1)
 		return Infos(home=home,mobile=mobile,work=work,phone2=phone2)
+
+
+
+
+	def edit_contact_by_id(self, id):
+		wd = self.app.wd
+		self.app.open_hp()
+		self.select_contact_by_id(id)
+		wd.find_element_by_css_selector('img[alt="Edit"]').click()
+		self.input('lastname', 'new lastname')
+		wd.find_element_by_name("update").click()
+		self.contacts_cache = None
+
+
+	def input(self, field_name, text):
+		wd = self.app.wd
+		if text is not None:
+			wd.find_element_by_name(field_name).click()
+			wd.find_element_by_name(field_name).clear()
+			wd.find_element_by_name(field_name).send_keys(text)
+
+
+	def edit_contact_form(self, Contact):
+		wd = self.app.wd
+		self.fill_form(Contact)
+		self.contact_cache = None
+
+
+	def select_contact_by_id(self, id):
+		wd = self.app.wd
+		wd.find_element_by_css_selector("input[value='%s']" % id).click()
+	def delete_contact_by_id(self, id):
+		wd = self.app.wd
+		self.select_contact_by_id(id)
+		wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+		wd.switch_to_alert().accept()
+		self.open_hp()
+		self.contact_cache = None
+
+	def open_contact_to_edit_by_id(self, id):
+		wd = self.app.wd
+		self.app.open_hp()
+		wd.find_element_by_xpath("//input[@value='%s']/../../td[8]/a" % id).click()
+
+	def open_contact_to_view_by_id(self, id):
+		wd = self.app.wd
+		self.open_hp()
+		wd.find_element_by_xpath("//input[@value='%s']/../../td[7]/a" % id).click()
+
