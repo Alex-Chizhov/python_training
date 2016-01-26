@@ -2,6 +2,8 @@ from selenium.webdriver.support.ui import Select
 from model.info_contact import Infos
 from selenium.webdriver.common.by import By
 import re
+from model.group import Group
+
 class ContactHelper:
 
 	def __init__(self,app):
@@ -279,3 +281,20 @@ class ContactHelper:
 		self.open_hp()
 		wd.find_element_by_xpath("//input[@value='%s']/../../td[7]/a" % id).click()
 
+	def add_contact_in_group(self, Contact, Group):
+		wd = self.app.wd
+		self.open_hp()
+		self.select_contact_by_id(Contact.id)
+		wd.find_element_by_name("to_group").send_keys(Group.name)
+		wd.find_element_by_name("add").click()
+
+	def delete_contact_from_group(self, Contact, Group):
+		wd = self.app.wd
+		self.app.open_hp()
+		wd.find_element_by_name("group").send_keys(Group.name)
+		wd.find_element_by_css_selector("body").click()
+		self.select_contact_by_id(Contact.id)
+		wd.find_element_by_name("remove").click()
+		self.open_hp()
+		wd.find_element_by_name("group").send_keys("[all]")
+		wd.find_element_by_css_selector("body").click()
